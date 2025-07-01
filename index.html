@@ -9,10 +9,32 @@
         <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="display: table; width: 100%; height: 100%; background: #253c5c"></canvas>
 
     <script>
-      var mywidth = innerWidth;
-      var myheight = innerHeight;
-      document.getElementById("unity-canvas").style.width = mywidth + "px";
-      document.getElementById("unity-canvas").style.height = myheight + "px";
+      const cvs = document.getElementById('unity-canvas');
+      const warning = document.getElementById('orientation-warning');
+
+      function updateLayout() {
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          const isPortrait = window.innerHeight > window.innerWidth;
+
+          if (isPortrait && isMobile) {
+              // Show warning only on mobile portrait
+              warning.style.display = 'block';
+              cvs.style.display = 'none';
+          } else {
+              // Show canvas and set its size
+              warning.style.display = 'none';
+              cvs.style.display = 'block';
+              
+              // Let CSS handle the sizing for mobile via the "fixed" style
+              if (!isMobile) {
+                  cvs.style.width = window.innerWidth + "px";
+                  cvs.style.height = window.innerHeight + "px";
+              }
+          }
+      }
+
+      window.addEventListener("resize", updateLayout);
+      window.addEventListener("load", updateLayout);
     </script>
 
     <style>
