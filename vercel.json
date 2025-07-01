@@ -1,21 +1,22 @@
 {
   "headers": [
     {
-      "source": "/Build/(.*)\\.unityweb",
+      "source": "/Build/(.+\\.js\\.unityweb)",
       "headers": [
-        { "key": "Content-Encoding", "value": "unityweb" }
+        { "key": "Content-Encoding", "value": "gzip" }
       ]
     },
     {
-      "source": "/Build/(.*)\\.wasm\\.unityweb",
+      "source": "/Build/(.+\\.data\\.unityweb)",
       "headers": [
+        { "key": "Content-Encoding", "value": "gzip" }
+      ]
+    },
+    {
+      "source": "/Build/(.+\\.wasm\\.unityweb)",
+      "headers": [
+        { "key": "Content-Encoding", "value": "gzip" },
         { "key": "Content-Type", "value": "application/wasm" }
-      ]
-    },
-    {
-      "source": "/Build/(.*)\\.js\\.unityweb",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
       ]
     }
   ]
